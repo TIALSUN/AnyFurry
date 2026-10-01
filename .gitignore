@@ -1,0 +1,24 @@
+# Only the current, reviewed release is versioned. Local design history stays local.
+/*
+!/.gitignore
+!/.gitattributes
+!/RELEASE_WORKFLOW.md
+!/security_best_practices_report.md
+!/blender_addon/
+/blender_addon/*
+!/blender_addon/anyfurry_mouth/
+!/blender_addon/build_release.py
+!/blender_addon/validation/
+/blender_addon/anyfurry_mouth/*
+!/blender_addon/anyfurry_mouth/*.py
+!/blender_addon/anyfurry_mouth/README.md
+!/blender_addon/anyfurry_mouth/assets/
+/blender_addon/anyfurry_mouth/assets/*
+!/blender_addon/anyfurry_mouth/assets/mouth_eye_base_v0281.blend
+/blender_addon/validation/*
+!/blender_addon/validation/*.json
+__pycache__/
+*.pyc
+*.blend1
+*.blend2
+

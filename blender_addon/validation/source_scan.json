@@ -1,0 +1,57 @@
+{
+  "scope": "shipped addon Python modules",
+  "source_files": [
+    {
+      "file": "__init__.py",
+      "sha256": "9528eaceb15c0fb867d71a41025fb76b7bddc8ab3e33709267faee27eabb12ee"
+    },
+    {
+      "file": "eye.py",
+      "sha256": "4084e4ef0004db5f94e058aed372833234509fb13ca40bd1d5f38b35ab562101"
+    },
+    {
+      "file": "mouth.py",
+      "sha256": "57b165f8797157007fc19c4ac274914a46efcd4b704d73ac360e49c863502b7a"
+    },
+    {
+      "file": "mouth_opening.py",
+      "sha256": "234a00a63dd43644aff63c25d1a9f2208e9895a61f32499c4a0c8eb3bec01188"
+    },
+    {
+      "file": "privacy.py",
+      "sha256": "c787c9f9bcd2c3ff1516138d7ddfa82880634bcbabd843ac154be7fdfec00e39"
+    },
+    {
+      "file": "project.py",
+      "sha256": "310e456ae383c1a6a96f66ad61a2b15da6e382ec8a9bd9d47580c92b3d613ac9"
+    },
+    {
+      "file": "recovery.py",
+      "sha256": "d9dbe7d6aa05adb13e2abb06ab1715a9c389fa4f67e936680eb21a782b7b60fd"
+    },
+    {
+      "file": "runtime.py",
+      "sha256": "88ebc449276658288627740a4eac0e737fed63c9455079456040a966862ab39a"
+    }
+  ],
+  "absolute_imports": [
+    "bmesh",
+    "bpy",
+    "bpy.app.handlers",
+    "bpy.props",
+    "bpy_extras.io_utils",
+    "json",
+    "math",
+    "mathutils",
+    "mathutils.bvhtree",
+    "os",
+    "pathlib",
+    "re",
+    "struct",
+    "time"
+  ],
+  "dangerous_direct_calls": [],
+  "personal_path_or_credential_literals": [],
+  "network_modules_detected": [],
+  "method": "AST plus manual source review; not a full vulnerability scanner"
+}

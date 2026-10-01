@@ -1,0 +1,43 @@
+{
+  "continue_and_selection": true,
+  "explicit_new_scene": true,
+  "shared_surface": {
+    "builds": 1,
+    "full_refresh_seconds": 1.494232600001851
+  },
+  "debounce_and_manual_mode": true,
+  "save_pending_and_reopen": true,
+  "preset_roundtrip_and_validation": true,
+  "projection_recovery_and_export_block": true,
+  "combined_geometry": [
+    {
+      "eye": "A",
+      "sign": 0,
+      "nonmanifold": 0,
+      "volume_mm3": 304708.53397950693
+    },
+    {
+      "eye": "B",
+      "sign": 1,
+      "nonmanifold": 0,
+      "volume_mm3": 305768.92205148976
+    },
+    {
+      "eye": "C",
+      "sign": -1,
+      "nonmanifold": 0,
+      "volume_mm3": 299055.4729210735
+    }
+  ],
+  "stl_reimport_mm": {
+    "triangles": 206062,
+    "dimensions": [
+      259.69329833984375,
+      195.22872924804688,
+      288.3514404296875
+    ]
+  },
+  "multi_scene_context": true,
+  "undo_operator": true,
+  "disable_reenable": true
+}
