@@ -1,0 +1,172 @@
+{
+  "preview_export_guard_and_default_off": {
+    "holes": 22,
+    "skipped": 6,
+    "minimum_opening_clearance_mm": 11.637900025099126,
+    "regions": [
+      "forehead",
+      "sides",
+      "top"
+    ]
+  },
+  "default_geometry_symmetry_and_source_preserved": {
+    "nonmanifold": 0,
+    "rear_surface_error_mm": 0.0,
+    "hole_count": 22,
+    "volume_reduction_percent": 5.525688171386719,
+    "generation_seconds": 8.250085500010755,
+    "layout": {
+      "holes": 22,
+      "skipped": 6,
+      "minimum_opening_clearance_mm": 11.637900025099126,
+      "regions": [
+        "forehead",
+        "sides",
+        "top"
+      ]
+    }
+  },
+  "manual_generation_after_parameter_change": true,
+  "relief_failure_rollback_and_retry": true,
+  "new_and_legacy_preset_compatibility": true,
+  "dense_small_mixed": {
+    "nonmanifold": 0,
+    "rear_surface_error_mm": 0.0,
+    "hole_count": 42,
+    "volume_reduction_percent": 2.292633295059204,
+    "case": "dense_small_mixed",
+    "layout": {
+      "holes": 42,
+      "skipped": 6,
+      "minimum_opening_clearance_mm": 14.743424742979713,
+      "regions": [
+        "forehead",
+        "sides",
+        "top"
+      ]
+    }
+  },
+  "large_sparse_mixed": {
+    "nonmanifold": 0,
+    "rear_surface_error_mm": 0.0,
+    "hole_count": 6,
+    "volume_reduction_percent": 2.8695549964904785,
+    "case": "large_sparse_mixed",
+    "layout": {
+      "holes": 6,
+      "skipped": 6,
+      "minimum_opening_clearance_mm": 18.212903632024226,
+      "regions": [
+        "forehead",
+        "sides",
+        "top"
+      ]
+    }
+  },
+  "sides_only": {
+    "nonmanifold": 0,
+    "rear_surface_error_mm": 0.0,
+    "hole_count": 6,
+    "volume_reduction_percent": 1.5228240489959717,
+    "case": "sides_only",
+    "layout": {
+      "holes": 6,
+      "skipped": 0,
+      "minimum_opening_clearance_mm": 11.637900025099126,
+      "regions": [
+        "sides"
+      ]
+    }
+  },
+  "top_only": {
+    "nonmanifold": 0,
+    "rear_surface_error_mm": 0.0,
+    "hole_count": 8,
+    "volume_reduction_percent": 2.000750780105591,
+    "case": "top_only",
+    "layout": {
+      "holes": 8,
+      "skipped": 2,
+      "minimum_opening_clearance_mm": 68.26543059366597,
+      "regions": [
+        "top"
+      ]
+    }
+  },
+  "combined_geometry_and_region_switches": [
+    {
+      "nonmanifold": 0,
+      "rear_surface_error_mm": 0.0,
+      "hole_count": 42,
+      "volume_reduction_percent": 2.292633295059204,
+      "case": "dense_small_mixed",
+      "layout": {
+        "holes": 42,
+        "skipped": 6,
+        "minimum_opening_clearance_mm": 14.743424742979713,
+        "regions": [
+          "forehead",
+          "sides",
+          "top"
+        ]
+      }
+    },
+    {
+      "nonmanifold": 0,
+      "rear_surface_error_mm": 0.0,
+      "hole_count": 6,
+      "volume_reduction_percent": 2.8695549964904785,
+      "case": "large_sparse_mixed",
+      "layout": {
+        "holes": 6,
+        "skipped": 6,
+        "minimum_opening_clearance_mm": 18.212903632024226,
+        "regions": [
+          "forehead",
+          "sides",
+          "top"
+        ]
+      }
+    },
+    {
+      "nonmanifold": 0,
+      "rear_surface_error_mm": 0.0,
+      "hole_count": 6,
+      "volume_reduction_percent": 1.5228240489959717,
+      "case": "sides_only",
+      "layout": {
+        "holes": 6,
+        "skipped": 0,
+        "minimum_opening_clearance_mm": 11.637900025099126,
+        "regions": [
+          "sides"
+        ]
+      }
+    },
+    {
+      "nonmanifold": 0,
+      "rear_surface_error_mm": 0.0,
+      "hole_count": 8,
+      "volume_reduction_percent": 2.000750780105591,
+      "case": "top_only",
+      "layout": {
+        "holes": 8,
+        "skipped": 2,
+        "minimum_opening_clearance_mm": 68.26543059366597,
+        "regions": [
+          "top"
+        ]
+      }
+    }
+  ],
+  "undo_redo_and_save_reopen": true,
+  "stl_reimport_closed_mm": {
+    "triangles": 205508,
+    "dimensions_mm": [
+      259.69329833984375,
+      195.22872924804688,
+      288.3514404296875
+    ]
+  },
+  "disable_reenable_and_asset_hash_unchanged": true
+}

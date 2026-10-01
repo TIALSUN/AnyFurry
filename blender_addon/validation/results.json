@@ -3,7 +3,7 @@
   "explicit_new_scene": true,
   "shared_surface": {
     "builds": 1,
-    "full_refresh_seconds": 1.494232600001851
+    "full_refresh_seconds": 2.4765544999972917
   },
   "debounce_and_manual_mode": true,
   "save_pending_and_reopen": true,

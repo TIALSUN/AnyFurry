@@ -1,21 +1,22 @@
 {
-  "release": "0.28.1",
+  "release": "0.29.0",
   "tested_blender": "5.2.0 LTS",
   "asset": "assets/mouth_eye_base_v0281.blend",
   "asset_sha256": "bb0c11cb9b784ff05e010a1db2077a447a75f96c512f429860e5f9ce8cd1e513",
   "source_sha256": {
-    "__init__.py": "9528eaceb15c0fb867d71a41025fb76b7bddc8ab3e33709267faee27eabb12ee",
+    "__init__.py": "527cb72ef40f5fd3eaceda4847f0ca8c7e3a5ff56d9910d75cef32c42f580a4e",
     "eye.py": "4084e4ef0004db5f94e058aed372833234509fb13ca40bd1d5f38b35ab562101",
-    "mouth.py": "57b165f8797157007fc19c4ac274914a46efcd4b704d73ac360e49c863502b7a",
+    "mouth.py": "43c5bdf8f9000be94bb56c8759e8a278c8098f18ed314f14da7f16864c608b60",
     "mouth_opening.py": "234a00a63dd43644aff63c25d1a9f2208e9895a61f32499c4a0c8eb3bec01188",
     "privacy.py": "c787c9f9bcd2c3ff1516138d7ddfa82880634bcbabd843ac154be7fdfec00e39",
-    "project.py": "310e456ae383c1a6a96f66ad61a2b15da6e382ec8a9bd9d47580c92b3d613ac9",
-    "recovery.py": "d9dbe7d6aa05adb13e2abb06ab1715a9c389fa4f67e936680eb21a782b7b60fd",
-    "runtime.py": "88ebc449276658288627740a4eac0e737fed63c9455079456040a966862ab39a",
-    "README.md": "3a8a50b631fc4958e67f38f22def386932be582966f13d9efe56eafa90313f5f"
+    "project.py": "5a73f7f3308574362d485c84b59be69595021f9c71f5c5aaac3f7026342468de",
+    "recovery.py": "101683a978c24dd263264e0a8ec6258b8e3966895419c318f8f66a91319968a7",
+    "relief.py": "5fd1fb38fbfad7db1d47e0810e87ee5b46a55fd3bc7d704ed4e3b99de2a809ad",
+    "runtime.py": "273e31fb38c6847d4f3c93f95dd00fd85662685025c11093b2a6056a52b66fa3",
+    "README.md": "3944e94336040385f1959493ab1f834643cb869aafa93a397750a9883bce218f"
   },
-  "report_sha256": "b56d319bbc4beb178d4430c05dba4e1b06ae1ac27ea02c1cb94d4737107f456b",
-  "workflow_sha256": "4166f6361efd3a8b5010b6a1a67af6f243cf1321f4a59765a8914a59e48791a0",
+  "report_sha256": "834580af37f7e44884703ea4c1b1a9536f411dcfe7d897875ba24eb6b5951ec8",
+  "workflow_sha256": "f97fd24139565d034908517b20bdf2c6ba96e7f69ec0c40ad2d5720bb2416a39",
   "failure_recovery_test": {
     "result": "STEP1_RECOVERY_PASS",
     "paths": [
@@ -25,7 +26,13 @@
     ],
     "retry": true
   },
-  "integration_note": "Version-neutral test_beta1_v0280.py rerun against v0.28.1 source and sanitized asset.",
+  "integration_note": "Version-neutral test_beta1_v0280.py rerun against v0.29.0 source and sanitized asset. New relief geometry, transactions, presets, undo/redo, save/reopen, STL reimport and scale limits passed; see relief_results.json and relief_limits_results.json.",
+  "incremental_security_scope": "Nine module AST, personal-path/credential patterns and error privacy rechecked; not a new comprehensive security audit.",
+  "production_profile": {
+    "material": null,
+    "printing_process": null,
+    "physical_validation": "not_checked"
+  },
   "not_checked": [
     "manual mouse-driven UI traversal",
     "other Blender versions",

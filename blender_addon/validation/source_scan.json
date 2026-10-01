@@ -3,7 +3,7 @@
   "source_files": [
     {
       "file": "__init__.py",
-      "sha256": "9528eaceb15c0fb867d71a41025fb76b7bddc8ab3e33709267faee27eabb12ee"
+      "sha256": "527cb72ef40f5fd3eaceda4847f0ca8c7e3a5ff56d9910d75cef32c42f580a4e"
     },
     {
       "file": "eye.py",
@@ -11,7 +11,7 @@
     },
     {
       "file": "mouth.py",
-      "sha256": "57b165f8797157007fc19c4ac274914a46efcd4b704d73ac360e49c863502b7a"
+      "sha256": "43c5bdf8f9000be94bb56c8759e8a278c8098f18ed314f14da7f16864c608b60"
     },
     {
       "file": "mouth_opening.py",
@@ -23,15 +23,19 @@
     },
     {
       "file": "project.py",
-      "sha256": "310e456ae383c1a6a96f66ad61a2b15da6e382ec8a9bd9d47580c92b3d613ac9"
+      "sha256": "5a73f7f3308574362d485c84b59be69595021f9c71f5c5aaac3f7026342468de"
     },
     {
       "file": "recovery.py",
-      "sha256": "d9dbe7d6aa05adb13e2abb06ab1715a9c389fa4f67e936680eb21a782b7b60fd"
+      "sha256": "101683a978c24dd263264e0a8ec6258b8e3966895419c318f8f66a91319968a7"
+    },
+    {
+      "file": "relief.py",
+      "sha256": "5fd1fb38fbfad7db1d47e0810e87ee5b46a55fd3bc7d704ed4e3b99de2a809ad"
     },
     {
       "file": "runtime.py",
-      "sha256": "88ebc449276658288627740a4eac0e737fed63c9455079456040a966862ab39a"
+      "sha256": "273e31fb38c6847d4f3c93f95dd00fd85662685025c11093b2a6056a52b66fa3"
     }
   ],
   "absolute_imports": [
@@ -40,10 +44,12 @@
     "bpy.app.handlers",
     "bpy.props",
     "bpy_extras.io_utils",
+    "hashlib",
     "json",
     "math",
     "mathutils",
     "mathutils.bvhtree",
+    "mathutils.geometry",
     "os",
     "pathlib",
     "re",

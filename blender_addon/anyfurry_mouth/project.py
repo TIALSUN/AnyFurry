@@ -14,6 +14,7 @@ from .privacy import error_message
 SHAPE_NAMES = ('嘴巴长度', '嘴巴宽度', '整体宽度', '整体高度', '额头高度', '眼部以下高度', '鼻嘴上下位置')
 EYE_NAMES = ('preset', 'openings_enabled', 'spacing', 'width', 'height', 'position', 'angle')
 MOUTH_NAMES = ('enabled', 'size', 'width', 'quadratic_coefficient', 'side_gap')
+RELIEF_NAMES = ('enabled', 'diameter_mm', 'clearance_mm', 'density', 'forehead', 'top', 'sides')
 
 
 def valid_shell(obj):
@@ -48,16 +49,17 @@ class AFProjectSettings(bpy.types.PropertyGroup):
 
 def parameters(scene):
     obj = shell_for(scene)
-    return {'format': 'anyfurry-preset', 'schema': 1,
+    return {'format': 'anyfurry-preset', 'schema': 2,
             'model': 'final-v0270',
             'shape': {n: obj.data.shape_keys.key_blocks[n].value for n in SHAPE_NAMES
                       if n in obj.data.shape_keys.key_blocks},
             'eye': {n: getattr(scene.af_eye, n) for n in EYE_NAMES},
-            'mouth': {n: getattr(scene.af_mouth_opening, n) for n in MOUTH_NAMES}}
+            'mouth': {n: getattr(scene.af_mouth_opening, n) for n in MOUTH_NAMES},
+            'relief': {n: getattr(scene.af_relief, n) for n in RELIEF_NAMES}}
 
 
 def validate_parameters(data):
-    if not isinstance(data, dict) or data.get('format') != 'anyfurry-preset' or data.get('schema') != 1:
+    if not isinstance(data, dict) or data.get('format') != 'anyfurry-preset' or data.get('schema') not in (1, 2):
         raise ValueError('不是支持的 AnyFurry 参数预设')
     if data.get('model') != 'final-v0270':
         raise ValueError('预设基础模型与当前最终版不同')
@@ -76,6 +78,21 @@ def validate_parameters(data):
                 minimum, maximum = (-0.6, 1) if name == '嘴巴长度' else ((18, 54) if name == 'quadratic_coefficient' else (-1, 1))
                 if type(value) not in (int, float) or not math.isfinite(value) or not minimum <= value <= maximum:
                     raise ValueError('参数超出范围：' + name)
+    if data['schema'] == 2:
+        values = data.get('relief')
+        if not isinstance(values, dict) or set(values) != set(RELIEF_NAMES):
+            raise ValueError('减重孔预设参数不完整')
+        for name, value in values.items():
+            if name == 'density':
+                if type(value) is not str or value not in ('SPARSE', 'MEDIUM', 'DENSE'):
+                    raise ValueError('减重孔疏密必须为疏、中或密')
+            elif name in ('enabled', 'forehead', 'top', 'sides'):
+                if type(value) is not bool:
+                    raise ValueError('减重孔开关必须为布尔值')
+            else:
+                minimum, maximum = (8, 26) if name == 'diameter_mm' else (4, 20)
+                if type(value) not in (int, float) or not math.isfinite(value) or not minimum <= value <= maximum:
+                    raise ValueError('减重孔参数超出范围：' + name)
 
 
 def apply_parameters(scene, data):
@@ -89,6 +106,9 @@ def apply_parameters(scene, data):
         setattr(scene.af_eye, name, value)
     for name, value in data['mouth'].items():
         setattr(scene.af_mouth_opening, name, value)
+    from . import relief
+    for name, value in (data['relief'] if data['schema'] == 2 else relief.DEFAULTS).items():
+        setattr(scene.af_relief, name, value)
 
 
 class HeadOperator:
@@ -99,12 +119,12 @@ class HeadOperator:
 
 class AF_OT_refresh_all(HeadOperator, bpy.types.Operator):
     bl_idname = 'anyfurry.refresh_all'
-    bl_label = '更新全部开孔 / 重试'
+    bl_label = '更新眼嘴孔与孔位 / 重试'
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
         if not runtime.flush(context.scene, force=True):
-            self.report({'ERROR'}, '更新失败，已保留上次开孔；请查看眼部或嘴部提示')
+            self.report({'ERROR'}, '更新失败，已保留上次开孔；请查看眼、嘴或减重孔提示')
             return {'CANCELLED'}
         return {'FINISHED'}
 
@@ -122,6 +142,8 @@ class AF_OT_reset_all(HeadOperator, bpy.types.Operator):
         data['shape'] = {n: 0 for n in SHAPE_NAMES}
         data['eye'] = {n: (True if n == 'openings_enabled' else 'A' if n == 'preset' else 0) for n in EYE_NAMES}
         data['mouth'] = {n: (True if n == 'enabled' else 36 if n == 'quadratic_coefficient' else 0) for n in MOUTH_NAMES}
+        from . import relief
+        data['relief'] = dict(relief.DEFAULTS)
         apply_parameters(context.scene, data)
         return bpy.ops.anyfurry.refresh_all()
 
@@ -183,6 +205,9 @@ class AF_OT_save_project(HeadOperator, bpy.types.Operator, ExportHelper):
 def export_stl(scene, filepath):
     if not runtime.flush(scene):
         raise ValueError('开孔未更新成功，暂不导出')
+    from . import relief
+    if not relief.ready(scene):
+        raise ValueError('减重孔仍为预览，请先生成 / 更新减重孔，或关闭减重孔后导出')
     obj = shell_for(scene)
     evaluated = obj.evaluated_get(bpy.context.evaluated_depsgraph_get())
     mesh = evaluated.to_mesh()

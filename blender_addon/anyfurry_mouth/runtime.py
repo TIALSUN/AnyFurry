@@ -13,13 +13,13 @@ DELAY = 0.35
 
 
 def modules():
-    from . import eye, mouth_opening
-    return eye, mouth_opening
+    from . import eye, mouth_opening, relief
+    return eye, mouth_opening, relief
 
 
 def signature(scene):
-    eye, mouth = modules()
-    return eye.state(scene), mouth.opening_state(scene)
+    eye, mouth, relief = modules()
+    return eye.state(scene), mouth.opening_state(scene), relief.state(scene)
 
 
 def surface(scene, shell):
@@ -72,7 +72,7 @@ def flush(scene, force=False):
     if token in _busy:
         return True
     _queue.pop(token, None)
-    eye, mouth = modules()
+    eye, mouth, relief = modules()
     if eye.shell_for(scene) is None:
         return True
     _busy.add(token)
@@ -86,7 +86,8 @@ def flush(scene, force=False):
         with bpy.context.temp_override(scene=scene, view_layer=scene.view_layers[0]):
             success = True
             for module, state_fn, settings in ((eye, eye.state, scene.af_eye),
-                                                (mouth, mouth.opening_state, scene.af_mouth_opening)):
+                                                (mouth, mouth.opening_state, scene.af_mouth_opening),
+                                                (relief, relief.state, scene.af_relief)):
                 state = state_fn(scene)
                 if force or module._last_state.get(token) != state:
                     success = module.refresh_scene(scene) and success
@@ -134,6 +135,8 @@ def clear():
     _busy.clear()
     for module in modules():
         module._last_state.clear()
+        if hasattr(module, 'clear'):
+            module.clear()
 
 
 @persistent
@@ -161,7 +164,7 @@ def undo_post(_):
 
 def draw_status(layout, scene):
     token = scene.as_pointer()
-    if scene.af_eye.error or scene.af_mouth_opening.error:
+    if scene.af_eye.error or scene.af_mouth_opening.error or scene.af_relief.error:
         layout.label(text='更新失败 · 保留上次结果，请重试', icon='ERROR')
     elif token in _busy:
         layout.label(text='正在计算开孔…', icon='TIME')
@@ -169,9 +172,11 @@ def draw_status(layout, scene):
         text = '快速预览 · 停止后恢复开孔' if token in _paused else '等待拖动结束后更新…'
         layout.label(text=text, icon='TIME')
     else:
-        eye, mouth = modules()
-        if (eye._last_state.get(token), mouth._last_state.get(token)) != signature(scene):
+        eye, mouth, relief = modules()
+        if (eye._last_state.get(token), mouth._last_state.get(token), relief._last_state.get(token)) != signature(scene):
             layout.label(text='参数已修改 · 点击更新', icon='INFO')
+        elif not relief.ready(scene):
+            layout.label(text='眼嘴孔已更新 · 减重孔待生成', icon='INFO')
         else:
             layout.label(text='开孔已更新', icon='CHECKMARK')
 

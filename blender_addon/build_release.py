@@ -10,10 +10,10 @@ import zipfile
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / 'anyfurry_mouth'
 MODULES = ('__init__.py', 'eye.py', 'mouth.py', 'mouth_opening.py',
-           'privacy.py', 'project.py', 'recovery.py', 'runtime.py')
+           'privacy.py', 'project.py', 'recovery.py', 'runtime.py', 'relief.py')
 VALIDATION = ('release_record.json', 'source_scan.json', 'results.json',
               'runtime_results.json', 'asset_privacy_verification.json',
-              'error_privacy_tests.json')
+              'error_privacy_tests.json', 'relief_results.json', 'relief_limits_results.json')
 PROFILE = re.compile(rb'(?i)[a-z]:[\\/]+(?:users|documents and settings)[\\/]+|/home/[^/\s]+/')
 CREDENTIAL = re.compile(rb'sk-[A-Za-z0-9_-]{24,}|AKIA[A-Z0-9]{16}|-----BEGIN(?: RSA)? PRIVATE KEY-----')
 

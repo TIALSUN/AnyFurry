@@ -9,6 +9,9 @@
 !/blender_addon/anyfurry_mouth/
 !/blender_addon/build_release.py
 !/blender_addon/validation/
+!/blender_addon/tests/
+/blender_addon/tests/*
+!/blender_addon/tests/*.py
 /blender_addon/anyfurry_mouth/*
 !/blender_addon/anyfurry_mouth/*.py
 !/blender_addon/anyfurry_mouth/README.md

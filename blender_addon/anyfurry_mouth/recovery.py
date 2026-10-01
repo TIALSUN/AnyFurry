@@ -4,7 +4,8 @@ from .privacy import error_message
 
 
 def is_cutter(obj):
-    return obj.type == 'MESH' and (obj.get('anyfurry_eye_cutter') or obj.get('anyfurry_mouth_cutter'))
+    return obj.type == 'MESH' and (obj.get('anyfurry_eye_cutter') or obj.get('anyfurry_mouth_cutter')
+                                  or obj.get('anyfurry_relief_cutter') or obj.get('anyfurry_relief_preview'))
 
 
 def copy_property(value):
@@ -29,10 +30,12 @@ class OpeningTransaction:
         for obj in self.scene.objects:
             if is_cutter(obj):
                 original = ([tuple(v.co) for v in obj.data.vertices],
+                            [tuple(e.vertices) for e in obj.data.edges],
                             [tuple(p.vertices) for p in obj.data.polygons],
                             [(p.use_smooth, p.material_index) for p in obj.data.polygons])
                 props = {key: copy_property(value) for key, value in obj.items()}
-                self.objects.append((obj, original, obj.matrix_world.copy(), props))
+                visibility = (obj.hide_viewport, obj.hide_render, obj.hide_get())
+                self.objects.append((obj, original, obj.matrix_world.copy(), props, visibility))
         self.modifiers = [(m, m.object, m.operation, m.solver, m.show_viewport, m.show_render)
                           for m in self.shell.modifiers
                           if m.type == 'BOOLEAN' and m.name.startswith('AnyFurry_实体')]
@@ -47,18 +50,20 @@ class OpeningTransaction:
             for mod, obj, operation, solver, viewport, render in self.modifiers:
                 mod.object, mod.operation, mod.solver = obj, operation, solver
                 mod.show_viewport, mod.show_render = viewport, render
-        for obj, original, matrix, props in self.objects:
+        for obj, original, matrix, props, visibility in self.objects:
             if error_type is not None:
                 # Restore in place: swapping meshes used by evaluated booleans
                 # can leave a live dependency graph pointing at freed data.
-                verts, faces, properties = original
+                verts, edges, faces, properties = original
                 obj.data.clear_geometry()
-                obj.data.from_pydata(verts, [], faces)
+                obj.data.from_pydata(verts, edges, faces)
                 for face, (smooth, material) in zip(obj.data.polygons, properties):
                     face.use_smooth = smooth
                     face.material_index = material
                 obj.data.update()
                 obj.matrix_world = matrix
+                obj.hide_viewport, obj.hide_render = visibility[:2]
+                obj.hide_set(visibility[2])
                 for key in list(obj.keys()):
                     del obj[key]
                 for key, value in props.items():

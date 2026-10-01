@@ -1,0 +1,10 @@
+{
+  "nonuniform_scale_rejection_keeps_cutter": true,
+  "invalid_pending_holes_hidden": true,
+  "recovery_after_scale_restore": true,
+  "uniform_scale_2x_hole_radius_mm": 9.000003818319291,
+  "empty_regions_export_blocked": true,
+  "material": null,
+  "printing_process": null,
+  "physical_validation": "not_checked"
+}

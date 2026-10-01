@@ -1,7 +1,7 @@
 """AnyFurry native shape-key controls."""
 from pathlib import Path
 import bpy
-from . import eye, mouth_opening, runtime, project
+from . import eye, mouth_opening, runtime, project, relief
 from .privacy import error_message
 from bpy.props import BoolProperty
 from mathutils import Quaternion, Vector
@@ -84,6 +84,7 @@ def controls(layout, obj, scene):
     shape_controls(layout, obj, (KEY, MOUTH_WIDTH_KEY, MUZZLE_VERTICAL_KEY))
     eye.controls(layout, scene)
     mouth_opening.controls(layout, scene)
+    relief.controls(layout, scene)
 
 
 def focus_model(context, obj):
@@ -265,7 +266,7 @@ class AF_OT_add_muzzle_vertical(bpy.types.Operator):
 
 
 class AF_PT_mouth(bpy.types.Panel):
-    bl_label = 'AnyFurry · Beta 1 · v0.28.1'
+    bl_label = 'AnyFurry · Beta 1 · v0.29.0'
     bl_idname = 'AF_PT_mouth'
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
@@ -285,7 +286,7 @@ class AF_PT_mouth(bpy.types.Panel):
             layout.prop(context.scene.af_project, 'fast_preview')
             runtime.draw_status(layout, context.scene)
             row = layout.row(align=True)
-            row.operator('anyfurry.refresh_all', text='更新 / 重试', icon='FILE_REFRESH')
+            row.operator('anyfurry.refresh_all', text='更新眼嘴 / 孔位', icon='FILE_REFRESH')
             row.operator('anyfurry.focus_model', text='正面查看')
         else:
             layout.operator('anyfurry.load_mouth', icon='MESH_MONKEY')
@@ -345,6 +346,15 @@ class AF_PT_files(HeadPanel, bpy.types.Panel):
         layout.operator('anyfurry.reset_all', icon='LOOP_BACK')
 
 
+class AF_PT_relief(HeadPanel, bpy.types.Panel):
+    bl_label = '减重孔'
+    bl_idname = 'AF_PT_relief'
+    bl_options = {'DEFAULT_CLOSED'}
+
+    def draw(self, context):
+        relief.controls(self.layout, context.scene)
+
+
 CLASSES = (
     AF_OT_load_mouth,
     AF_OT_focus_model,
@@ -362,6 +372,7 @@ CLASSES = (
     AF_PT_nose,
     AF_PT_eye,
     AF_PT_opening,
+    AF_PT_relief,
     AF_PT_files,
 )
 
